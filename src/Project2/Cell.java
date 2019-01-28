@@ -4,16 +4,16 @@ package Project2;
 
 public class Cell {
 
-
+    /** Number of adjacent cells with mines */
     private int mineCount;
 
-
+    /** Tell if player has flagged cell as a mine */
     private boolean isFlagged;
 
-
+    /** Tell if cell's contents is shown */
     private boolean isExposed;
 
-
+    /** Tell if cell holds a mine */
     private boolean isMine;
 
 
