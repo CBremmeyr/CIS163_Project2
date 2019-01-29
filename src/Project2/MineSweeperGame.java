@@ -2,24 +2,37 @@ package Project2;
 
 public class MineSweeperGame {
 
-    /**  */
+    /** Max dimensions of the game board */
     private final int MAX_BOARD_SIZE = 255;
 
-    /**  */
+    /** Array of cells that makes up the game board */
     private Cell[][] board;
 
-    /**  */
+    /** Dimension of the board */
     private int boardSize;
 
-    /**  */
+    /** Current state of the game */
     private GameStatus status;
 
-    /**  */
+    /** Total number of mines on the board */
     private int totalMineCount;
 
 
-
-    public MineSweeperGame(int boardSize, int totalMineCount) throws IllegalArgumentException {
+    /******************************************************************
+     * Constructor that sets board size and total ammount of mines to
+     * be on the board. The game board is also allocated based on
+     * boardSize param.
+     *
+     * @param boardSize dimension of the game board to be allocated.
+     * @param totalMineCount total amount of mines to place on the
+     *                       board.
+     * @throws IllegalArgumentException if boardSize is negative or is
+     *         higher than max board size. Or if mine count is negative
+     *         or greater than one less than the amount of cells on the
+     *         game board.
+     *****************************************************************/
+    public MineSweeperGame(int boardSize, int totalMineCount) throws
+            IllegalArgumentException {
 
         // Check for valid inputs //
         // Board size should be positive and under max size
@@ -27,8 +40,10 @@ public class MineSweeperGame {
             throw new IllegalArgumentException();
         }
 
-        // Mine count should be positive and allow for at least 1 non-mine cell
-        else if(totalMineCount < 0 || totalMineCount > boardSize * boardSize - 1) {
+        // Mine count should be positive and allow for at least
+        // 1 non-mine cell
+        else if(totalMineCount < 0 ||
+                totalMineCount > boardSize * boardSize - 1) {
             throw new IllegalArgumentException();
         }
 
@@ -46,6 +61,4 @@ public class MineSweeperGame {
             }
         }
     }
-
-    
 }
