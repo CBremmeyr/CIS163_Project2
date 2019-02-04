@@ -18,6 +18,22 @@ public class MineSweeperGame {
     private int totalMineCount;
 
 
+    public MineSweeperGame() {
+
+        this.boardSize = 10;
+        this.totalMineCount = 10;
+        this.status = GameStatus.NotOverYet;
+
+        this.board = new Cell[this.boardSize][this.boardSize];
+
+        for(int i=0; i<this.boardSize; ++i) {
+            for(int j=0; j<this.boardSize; ++i) {
+
+                this.board[i][j] = new Cell();
+            }
+        }
+    }
+
     /******************************************************************
      * Constructor that sets board size and total ammount of mines to
      * be on the board. The game board is also allocated based on
@@ -60,5 +76,7 @@ public class MineSweeperGame {
                 this.board[i][j] = new Cell();
             }
         }
+
+        this.status = GameStatus.NotOverYet;
     }
 }
