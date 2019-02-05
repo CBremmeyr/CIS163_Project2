@@ -17,7 +17,10 @@ public class MineSweeperGame {
     /** Total number of mines on the board */
     private int totalMineCount;
 
-
+    /******************************************************************
+     * Default constructor that sets board size and mine count to 10
+     * and allocate memory for instance objects.
+     *****************************************************************/
     public MineSweeperGame() {
 
         this.boardSize = 10;
