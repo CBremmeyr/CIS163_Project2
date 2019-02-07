@@ -1,5 +1,7 @@
 package Project2;
 
+import java.util.Random;
+
 public class MineSweeperGame {
 
     /** Max dimensions of the game board */
@@ -82,4 +84,75 @@ public class MineSweeperGame {
 
         this.status = GameStatus.NotOverYet;
     }
+
+    /******************************************************************
+     * Randomly fill board with mines. Values for the board size and
+     * total mine count need to be set before function is used.
+     *****************************************************************/
+    private void placeMines() {
+
+        Random rn = new Random();
+        int minesPlaced = 0;
+
+        while(minesPlaced < this.totalMineCount) {
+
+            int col = rn.nextInt(this.boardSize);
+            int row = rn.nextInt(this.boardSize);
+
+            if(!this.board[row][col].isMine()) {
+                this.board[row][col].setMine(true);
+            }
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
