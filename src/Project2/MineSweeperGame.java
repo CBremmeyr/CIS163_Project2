@@ -7,6 +7,12 @@ public class MineSweeperGame {
     /** Max dimensions of the game board */
     private final int MAX_BOARD_SIZE = 255;
 
+    /** Board size value used by default constructor */
+    private final int DEFAULT_BOARD_SIZE = 10;
+
+    /** Total mine count value used by default constructor */
+    private final int DEFAULT_MINE_COUNT = 10;
+
     /** Array of cells that makes up the game board */
     private Cell[][] board;
 
@@ -25,8 +31,8 @@ public class MineSweeperGame {
      *****************************************************************/
     public MineSweeperGame() {
 
-        this.boardSize = 10;
-        this.totalMineCount = 10;
+        this.boardSize = DEFAULT_BOARD_SIZE;
+        this.totalMineCount = DEFAULT_MINE_COUNT;
         this.status = GameStatus.NotOverYet;
 
         this.board = new Cell[this.boardSize][this.boardSize];
@@ -149,7 +155,12 @@ public class MineSweeperGame {
         }
     }
 
-    
+
+    public void reset() {
+
+    }
+
+
     private void exposeCell(Cell selectedCell) {
 
     }
