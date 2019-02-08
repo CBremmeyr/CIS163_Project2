@@ -94,7 +94,8 @@ public class MineSweeperGame {
      * @throws IllegalArgumentException if mineCount or board size is
      *          not set.
      *****************************************************************/
-    private void placeMines() throws NullPointerException, IllegalArgumentException {
+    private void placeMines() throws NullPointerException,
+            IllegalArgumentException {
 
         // Test if boardSize and mineCount is set
         if(this.boardSize == 0 || this.totalMineCount == 0) {
@@ -118,6 +119,39 @@ public class MineSweeperGame {
                 throw new NullPointerException();
             }
         }
+    }
+
+    /******************************************************************
+     * API function for when a user clicks a box.
+     *
+     * @param row row of the  button pressed.
+     * @param col column of the button pressed.
+     * @throws IllegalArgumentException if 'row' or 'col' is not
+     */
+    public void select(int row, int col) throws IllegalArgumentException {
+
+        // Check that row and column are in valid range
+        if(row < this.boardSize || row >= this.boardSize) {
+            throw new IllegalArgumentException();
+        }
+        else if(col < this.boardSize || col >= this.boardSize) {
+            throw new IllegalArgumentException();
+        }
+
+        Cell selectedCell = this.board[row][col];
+
+        // If flagged do nothing
+        if(selectedCell.isFlagged()) {
+            return;
+        }
+        else {
+            exposeCell(selectedCell);
+        }
+    }
+
+    
+    private void exposeCell(Cell selectedCell) {
+
     }
 
 }
