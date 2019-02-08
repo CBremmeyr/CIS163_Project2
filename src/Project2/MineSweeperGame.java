@@ -35,14 +35,7 @@ public class MineSweeperGame {
         this.totalMineCount = DEFAULT_MINE_COUNT;
         this.status = GameStatus.NotOverYet;
 
-        this.board = new Cell[this.boardSize][this.boardSize];
-
-        for(int i=0; i<this.boardSize; ++i) {
-            for(int j=0; j<this.boardSize; ++i) {
-
-                this.board[i][j] = new Cell();
-            }
-        }
+        this.allocateBoard();
     }
 
     /******************************************************************
@@ -77,18 +70,10 @@ public class MineSweeperGame {
         // Set instance variables to parameter values
         this.totalMineCount = totalMineCount;
         this.boardSize = boardSize;
+        this.status = GameStatus.NotOverYet;
 
         // Allocate memory for board and it's cells
-        this.board = new Cell[boardSize][boardSize];
-
-        for(int i=0; i<this.boardSize; ++i) {
-            for(int j=0; j<this.boardSize; ++j) {
-
-                this.board[i][j] = new Cell();
-            }
-        }
-
-        this.status = GameStatus.NotOverYet;
+        this.allocateBoard();
     }
 
     /******************************************************************
@@ -133,7 +118,8 @@ public class MineSweeperGame {
      * @param row row of the  button pressed.
      * @param col column of the button pressed.
      * @throws IllegalArgumentException if 'row' or 'col' is not
-     */
+     *          between 0 and boardSize - 1
+     *****************************************************************/
     public void select(int row, int col) throws IllegalArgumentException {
 
         // Check that row and column are in valid range
@@ -158,6 +144,7 @@ public class MineSweeperGame {
 
     public void reset() {
 
+        
     }
 
 
@@ -165,6 +152,23 @@ public class MineSweeperGame {
 
     }
 
+    /******************************************************************
+     * Helper method for constructors that makes new objects for
+     * 'board' and all its elements.
+     *****************************************************************/
+    private void allocateBoard() {
+
+        // Make new array of Cells
+        this.board = new Cell[boardSize][boardSize];
+
+        // Fill array with new Cells
+        for(int i=0; i<this.boardSize; ++i) {
+            for(int j=0; j<this.boardSize; ++j) {
+
+                this.board[i][j] = new Cell();
+            }
+        }
+    }
 }
 
 
