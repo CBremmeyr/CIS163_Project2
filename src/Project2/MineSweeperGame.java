@@ -87,9 +87,19 @@ public class MineSweeperGame {
 
     /******************************************************************
      * Randomly fill board with mines. Values for the board size and
-     * total mine count need to be set before function is used.
+     * total mine count need to be set and memory for board cells must
+     * be allocated before function is used.
+     *
+     * @throws NullPointerException if cells in board are null pointers
+     * @throws IllegalArgumentException if mineCount or board size is
+     *          not set.
      *****************************************************************/
-    private void placeMines() {
+    private void placeMines() throws NullPointerException, IllegalArgumentException {
+
+        // Test if boardSize and mineCount is set
+        if(this.boardSize == 0 || this.totalMineCount == 0) {
+            throw new IllegalAccessError();
+        }
 
         Random rn = new Random();
         int minesPlaced = 0;
@@ -99,8 +109,13 @@ public class MineSweeperGame {
             int col = rn.nextInt(this.boardSize);
             int row = rn.nextInt(this.boardSize);
 
-            if(!this.board[row][col].isMine()) {
-                this.board[row][col].setMine(true);
+            try {
+                if (!this.board[row][col].isMine()) {
+                    this.board[row][col].setMine(true);
+                }
+            }
+            catch (NullPointerException e) {
+                throw new NullPointerException();
             }
         }
     }
