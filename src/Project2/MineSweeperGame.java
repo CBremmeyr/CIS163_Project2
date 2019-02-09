@@ -198,6 +198,15 @@ public class MineSweeperGame {
             }
         }
     }
+
+    /******************************************************************
+     * Gets the current status of the game.
+     *
+     * @return if the game has been lost, won, or ongoing.
+     *****************************************************************/
+    public GameStatus getStatus() {
+        return status;
+    }
 }
 
 
