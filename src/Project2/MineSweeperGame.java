@@ -179,12 +179,42 @@ public class MineSweeperGame {
         ++this.exposedCount;
     }
 
-    private void calcCellMineCount(int row, int col) throws IllegalArgumentException {
+    /******************************************************************
+     * Calculates the number of adjacent cells with mines. The value
+     * calculated is set in the cell at [row][col].
+     *
+     * @param row row of cell who's 'mineCount' is to be calculated.
+     * @param col col of cell who's 'mineCount' is to be calculated.
+     * @throws IllegalArgumentException if 'row' or 'col' is out of
+     *          bounds as an index for board[][].
+     *****************************************************************/
+    private void calcCellMineCount(int row, int col) throws
+            IllegalArgumentException {
 
         // Check for valid inputs
         if(checkValidRowCol(row, col)) {
             throw new IllegalArgumentException();
         }
+
+        int mineCount = 0;
+
+        for(int i = row-1; i < row+1; ++i) {
+            for(int j = col-1; j < col+1; ++j) {
+
+                // Don't count this cell even if it has a mine
+                if(i != row && j != col) {
+
+                    // Count adjacent cell has a mine
+                    if(this.board[i][j].isMine()) {
+                        ++mineCount;
+                    }
+
+                }
+            }
+        }
+
+        // Set number of adjacent mines for this cell
+        this.board[row][col].setMineCount(mineCount);
     }
 
     /******************************************************************
