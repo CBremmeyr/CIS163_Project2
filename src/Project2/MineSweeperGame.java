@@ -200,6 +200,29 @@ public class MineSweeperGame {
     }
 
     /******************************************************************
+     * Getter for cell at location [row][col].
+     *
+     * @param row row of cell to get.
+     * @param col column of cell to get.
+     * @return cell at location [row][col]
+     * @throws IllegalArgumentException if 'row' or 'col' are negative
+     *          or greater/equal to the board size.
+     *****************************************************************/
+    public Cell getCell(int row, int col) throws
+            IllegalArgumentException {
+
+        // Check for valid row and column values
+        if(row < 0 || row >= this.boardSize) {
+            throw new IllegalArgumentException();
+        }
+        else if(col < 0 || col >= this.boardSize) {
+            throw new IllegalArgumentException();
+        }
+
+        return this.board[row][col];
+    }
+
+    /******************************************************************
      * Gets the current status of the game.
      *
      * @return if the game has been lost, won, or ongoing.
