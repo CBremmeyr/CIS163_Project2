@@ -180,6 +180,19 @@ public class MineSweeperGame {
     }
 
     /******************************************************************
+     * Calculates and sets the number of adjacent mines for all cells
+     * on the board.
+     *****************************************************************/
+    private void calcAllCellMineCounts() {
+
+        for(int i=0; i<this.board.length; ++i) {
+            for(int j=0; j<this.board.length; ++j) {
+                calcCellMineCount(i, j);
+            }
+        }
+    }
+
+    /******************************************************************
      * Calculates the number of adjacent cells with mines. The value
      * calculated is set in the cell at [row][col].
      *
@@ -208,7 +221,6 @@ public class MineSweeperGame {
                     if(this.board[i][j].isMine()) {
                         ++mineCount;
                     }
-
                 }
             }
         }
