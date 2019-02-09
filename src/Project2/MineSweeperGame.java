@@ -123,14 +123,16 @@ public class MineSweeperGame {
     }
 
     /******************************************************************
-     * API function for when a user clicks a box.
+     * API function for when a user clicks a box. Recursively selects
+     * all adjacent cells with zero adjacent bomb cells.
      *
      * @param row row of the  button pressed.
      * @param col column of the button pressed.
      * @throws IllegalArgumentException if 'row' or 'col' is not
      *          between 0 and boardSize - 1
      *****************************************************************/
-    public void select(int row, int col) throws IllegalArgumentException {
+    public void select(int row, int col) throws
+            IllegalArgumentException {
 
         // Check that row and column are in valid range
         if(checkValidRowCol(row, col)) {
@@ -202,8 +204,8 @@ public class MineSweeperGame {
      *****************************************************************/
     private void calcAllCellMineCounts() {
 
-        for(int i=0; i<this.board.length; ++i) {
-            for(int j=0; j<this.board.length; ++j) {
+        for(int i=0; i<this.boardSize; ++i) {
+            for(int j=0; j<this.boardSize; ++j) {
                 calcCellMineCount(i, j);
             }
         }
@@ -232,7 +234,7 @@ public class MineSweeperGame {
             for(int j = col-1; j < col+1; ++j) {
 
                 // Don't check for cells outside limits of board
-                if(i != this.board.length && j != this.board.length) {
+                if(i != this.boardSize && j != this.boardSize) {
 
                     // Don't count this cell even if it has a mine
                     if(i != row && j != col) {
@@ -265,7 +267,7 @@ public class MineSweeperGame {
         if(row < 0 || row >= this.board.length) {
             return true;
         }
-        else if(col < 0 || col >= this.board.length) {
+        else if(col < 0 || col >= this.board[row].length) {
             return true;
         }
 
