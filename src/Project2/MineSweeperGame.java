@@ -2,6 +2,7 @@ package Project2;
 
 import java.util.Random;
 
+// TODO: class javadoc comment
 public class MineSweeperGame {
 
     /** Max dimensions of the game board */
@@ -130,10 +131,7 @@ public class MineSweeperGame {
     public void select(int row, int col) throws IllegalArgumentException {
 
         // Check that row and column are in valid range
-        if(row < this.boardSize || row >= this.boardSize) {
-            throw new IllegalArgumentException();
-        }
-        else if(col < this.boardSize || col >= this.boardSize) {
+        if(checkValidRowCol(row, col)) {
             throw new IllegalArgumentException();
         }
 
@@ -181,6 +179,36 @@ public class MineSweeperGame {
         ++this.exposedCount;
     }
 
+    private void calcCellMineCount(int row, int col) throws IllegalArgumentException {
+
+        // Check for valid inputs
+        if(checkValidRowCol(row, col)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    /******************************************************************
+     * Checks if a given row and column are in bounds of the board[][]
+     * indexes.
+     *
+     * @param row value to be tested.
+     * @param col value to be tested.
+     * @return true if 'row' or 'col' is invalid, false if 'row' and
+     *         'col' are valid.
+     *****************************************************************/
+    private boolean checkValidRowCol(int row, int col) {
+
+        // Check if row and col are inbounds of board indexes
+        if(row < 0 || row >= this.board.length) {
+            return true;
+        }
+        else if(col < 0 || col >= this.board.length) {
+            return true;
+        }
+
+        return false;
+    }
+
     /******************************************************************
      * Helper method for constructors that makes new objects for
      * 'board' and all its elements.
@@ -212,10 +240,7 @@ public class MineSweeperGame {
             IllegalArgumentException {
 
         // Check for valid row and column values
-        if(row < 0 || row >= this.boardSize) {
-            throw new IllegalArgumentException();
-        }
-        else if(col < 0 || col >= this.boardSize) {
+        if(checkValidRowCol(row, col)) {
             throw new IllegalArgumentException();
         }
 
