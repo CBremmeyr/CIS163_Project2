@@ -25,6 +25,9 @@ public class MineSweeperGame {
     /** Total number of mines on the board */
     private int totalMineCount;
 
+    /** Number of cells exposed, used to see if player won */
+    private int exposedCount;
+
     /******************************************************************
      * Default constructor that sets board size and mine count to 10
      * and allocate memory for instance objects.
@@ -34,8 +37,10 @@ public class MineSweeperGame {
         this.boardSize = DEFAULT_BOARD_SIZE;
         this.totalMineCount = DEFAULT_MINE_COUNT;
         this.status = GameStatus.NotOverYet;
+        this.exposedCount = 0;
 
         this.allocateBoard();
+        this.reset();
     }
 
     /******************************************************************
@@ -54,7 +59,7 @@ public class MineSweeperGame {
     public MineSweeperGame(int boardSize, int totalMineCount) throws
             IllegalArgumentException {
 
-        // Check for valid inputs //
+        // Check for valid inputs
         // Board size should be positive and under max size
         if(boardSize < 0 || boardSize > MAX_BOARD_SIZE) {
             throw new IllegalArgumentException();
@@ -71,9 +76,11 @@ public class MineSweeperGame {
         this.totalMineCount = totalMineCount;
         this.boardSize = boardSize;
         this.status = GameStatus.NotOverYet;
+        this.exposedCount = 0;
 
         // Allocate memory for board and it's cells
         this.allocateBoard();
+        this.reset();
     }
 
     /******************************************************************
@@ -141,15 +148,37 @@ public class MineSweeperGame {
         }
     }
 
-
+    /******************************************************************
+     * Sets the board for a new game.
+     *****************************************************************/
     public void reset() {
 
-        
+        // Reset each cell
+        for(int i=0; i<this.boardSize; ++i) {
+            for(int j=0; j<this.boardSize; ++i) {
+                this.board[i][j].setExposed(false);
+                this.board[i][j].setMine(false);
+                this.board[i][j].setFlagged(false);
+                this.board[i][j].setMineCount(0);
+            }
+        }
+
+        this.placeMines();
+        this.exposedCount = 0;
     }
 
-
+    // TODO: finish function
     private void exposeCell(Cell selectedCell) {
 
+        // If player clicked on a mine
+        if(selectedCell.isMine()) {
+            this.status = GameStatus.Lost;
+        }
+        else {
+
+        }
+
+        ++this.exposedCount;
     }
 
     /******************************************************************
