@@ -143,9 +143,24 @@ public class MineSweeperGame {
         if(selectedCell.isFlagged()) {
             return;
         }
-        else {
-            exposeCell(selectedCell);
+
+        this.exposeCell(selectedCell);
+
+        // If the selected cell has no adjacent mines then start to
+        // recursively expose cells with no no adjacent mines
+        if(selectedCell.getMineCount() == 0) {
+
+            for(int i = row-1; i < row+1; ++i) {
+                for(int j = col-1; j < col+1; ++j) {
+
+                    // If the cell[i,j] is on the board, select it
+                    if(!this.checkValidRowCol(i, j)) {
+                        this.select(i, j);
+                    }
+                }
+            }
         }
+
     }
 
     /******************************************************************
