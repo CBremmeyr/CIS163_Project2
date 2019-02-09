@@ -42,6 +42,7 @@ public class MineSweeperGame {
 
         this.allocateBoard();
         this.reset();
+        this.calcAllCellMineCounts();
     }
 
     /******************************************************************
@@ -82,6 +83,7 @@ public class MineSweeperGame {
         // Allocate memory for board and it's cells
         this.allocateBoard();
         this.reset();
+        this.calcAllCellMineCounts();
     }
 
     /******************************************************************
