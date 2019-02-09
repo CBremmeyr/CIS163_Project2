@@ -214,12 +214,16 @@ public class MineSweeperGame {
         for(int i = row-1; i < row+1; ++i) {
             for(int j = col-1; j < col+1; ++j) {
 
-                // Don't count this cell even if it has a mine
-                if(i != row && j != col) {
+                // Don't check for cells outside limits of board
+                if(i != this.board.length && j != this.board.length) {
 
-                    // Count adjacent cell has a mine
-                    if(this.board[i][j].isMine()) {
-                        ++mineCount;
+                    // Don't count this cell even if it has a mine
+                    if(i != row && j != col) {
+
+                        // Count adjacent cell has a mine
+                        if(this.board[i][j].isMine()) {
+                            ++mineCount;
+                        }
                     }
                 }
             }
