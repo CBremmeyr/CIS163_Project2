@@ -4,7 +4,7 @@ package Project2;
  * Individual cell to be used in a Mine Sweeper game.
  *
  * @author Corbin Bremmeyr
- * @version 28 January 2019
+ * @version 12 February 2019
  *********************************************************************/
 public class Cell {
 
@@ -41,12 +41,20 @@ public class Cell {
     }
 
     /******************************************************************
-     * Setter for number of adjacent cells with mines.
+     * Setter for number of adjacent cells with mines. If input is
+     * invalid, less than 0, the value is set to zero.
      *
      * @param mineCount Number of adjacent cells with mines to be set.
+     *                  Only non-negative values are valid.
      *****************************************************************/
     public void setMineCount(int mineCount) {
-        this.mineCount = mineCount;
+
+        if(mineCount >= 0) {
+            this.mineCount = mineCount;
+        }
+        else {
+            this.mineCount = 0;
+        }
     }
 
     /******************************************************************
