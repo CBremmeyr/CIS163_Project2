@@ -4,6 +4,7 @@ package Project2;
  * Individual cell to be used in a Mine Sweeper game.
  *
  * @author Corbin Bremmeyr
+ * @author Michael James
  * @version 12 February 2019
  *********************************************************************/
 public class Cell {
