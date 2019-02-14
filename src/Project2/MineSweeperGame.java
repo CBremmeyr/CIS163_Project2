@@ -146,6 +146,11 @@ public class MineSweeperGame {
             return;
         }
 
+        // If selected cell holds a bomb
+        if(selectedCell.isMine()) {
+            this.status = GameStatus.Lost;
+        }
+
         this.exposeCell(selectedCell);
 
         // If the selected cell has no adjacent mines then start to
