@@ -76,6 +76,8 @@ public class MineSweeperPanel extends JPanel {
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
+
+
             if(SwingUtilities.isRightMouseButton(e)) {
                 System.out.println("right click");
             }
@@ -84,7 +86,7 @@ public class MineSweeperPanel extends JPanel {
             }
         }
     }
-
+    
 
 }
 
