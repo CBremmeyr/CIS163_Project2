@@ -1,6 +1,7 @@
 package Project2;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MineSweeperPanel extends JPanel {
 
@@ -22,6 +23,9 @@ public class MineSweeperPanel extends JPanel {
         this.resetBtn = new JButton();
         this.board = new JButton[boardSize][boardSize];
         this.game = new MineSweeperGame(boardSize, mineCount);
+
+        // Set layout to grid for cell buttons
+        setLayout(new GridLayout(boardSize + 2, boardSize));
 
         // Make button array for mine cells
         for(int i = 0; i < this.boardSize; ++i) {
