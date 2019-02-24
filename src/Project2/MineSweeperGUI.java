@@ -17,10 +17,14 @@ class MineSweeperGUI {
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setTitle("Mine Sweeper (May the clicks be with you");
 
-        gui.setSize(800, 800);
-        gui.setVisible(true);
+        gui.setSize(400, 400);
         gui.setContentPane(new MineSweeperPanel(boardSize, mineCount));
+        gui.pack();
+
+        gui.setVisible(true);
+
 
 
     }
+
 }
