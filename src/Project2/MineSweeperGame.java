@@ -114,6 +114,7 @@ public class MineSweeperGame {
             try {
                 if (!this.board[row][col].isMine()) {
                     this.board[row][col].setMine(true);
+                    ++minesPlaced;
                 }
             }
             catch (NullPointerException e) {
@@ -177,7 +178,7 @@ public class MineSweeperGame {
 
         // Reset each cell
         for(int i=0; i<this.boardSize; ++i) {
-            for(int j=0; j<this.boardSize; ++i) {
+            for(int j=0; j<this.boardSize; ++j) {
                 this.board[i][j].setExposed(false);
                 this.board[i][j].setMine(false);
                 this.board[i][j].setFlagged(false);
@@ -220,8 +221,8 @@ public class MineSweeperGame {
      * Calculates the number of adjacent cells with mines. The value
      * calculated is set in the cell at [row][col].
      *
-     * @param row row of cell who's 'mineCount' is to be calculated.
-     * @param col col of cell who's 'mineCount' is to be calculated.
+     * @param row row of cell whose 'mineCount' is to be calculated.
+     * @param col col of cell whose 'mineCount' is to be calculated.
      * @throws IllegalArgumentException if 'row' or 'col' is out of
      *          bounds as an index for board[][].
      *****************************************************************/
@@ -239,7 +240,8 @@ public class MineSweeperGame {
             for(int j = col-1; j < col+1; ++j) {
 
                 // Don't check for cells outside limits of board
-                if(i != this.boardSize && j != this.boardSize) {
+                if((i < this.boardSize && j < this.boardSize) &&
+                        (i > 0 && j > 0)) {
 
                     // Don't count this cell even if it has a mine
                     if(i != row && j != col) {
