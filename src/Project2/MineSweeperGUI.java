@@ -1,4 +1,6 @@
 package Project2;
+import org.omg.CORBA.UserException;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -20,19 +22,37 @@ public class MineSweeperGUI {
         int mineCount;
 
         // Get board size from user with jOptionPane
-        boardSize = self.getPopupInputNum("Enter board size");
+        try {
+            boardSize = self.getPopupInputNum("Enter board size");
+        } catch (ExitException e) {
+            return;
+        }
 
         // Check for valid board size, if invalid get new value
         while(boardSize > MAX_BOARD_SIZE || boardSize <= 0) {
-            boardSize = self.getPopupInputNum("Invalid board size value");
+            try {
+                boardSize = self.getPopupInputNum("Invalid board " +
+                        "size value\nEnter a new board size");
+
+            } catch (ExitException e) {
+                return;
+            }
         }
 
         // Get mineCount from user
-        mineCount = self.getPopupInputNum("Enter total amount of mines");
+        try {
+            mineCount = self.getPopupInputNum("Enter total amount of mines");
+        } catch (ExitException e) {
+            return;
+        }
 
         // Check for valid mine count, if invalid get new value
         while(mineCount <= 0 || mineCount >= boardSize * boardSize) {
-            mineCount = self.getPopupInputNum("Invalid mine amount\nEnter a new amount");
+            try {
+                mineCount = self.getPopupInputNum("Invalid mine amount\nEnter a new amount");
+            } catch (ExitException e) {
+                return;
+            }
         }
 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,9 +65,14 @@ public class MineSweeperGUI {
 
     }
 
-    private int getPopupInputNum(String mesg) {
+    private int getPopupInputNum(String mesg) throws ExitException {
         this.boardSizeInput = JOptionPane.showInputDialog(mesg);
-        return Integer.parseInt(this.boardSizeInput);
+        try {
+            return Integer.parseInt(this.boardSizeInput);
+
+        } catch (Exception e) {
+            throw new ExitException();
+        }
     }
 
 }
