@@ -7,30 +7,32 @@ import java.util.*;
 
 public class MineSweeperGUI {
 
+    private String boardSizeInput;
+    private String mineInput;
+
     public static void main(String arg[]) {
 
         final int MAX_BOARD_SIZE = 100;
 
+        MineSweeperGUI self = new MineSweeperGUI();
         JFrame gui = new JFrame();
-        String boardSizeInput;
-        String mineInput;
         int boardSize;
         int mineCount;
 
-        // Get board size and mine count from user with jOptionPane
-        boardSizeInput = JOptionPane.showInputDialog("Enter Board Size");
-        mineInput = JOptionPane.showInputDialog("Enter Number of Mines");
+        // Get board size from user with jOptionPane
+        boardSize = self.getPopupInputNum("Enter board size");
 
-        // TODO: move lines to after inputs are check if valid
-        boardSize = Integer.parseInt(boardSizeInput);
-        mineCount = Integer.parseInt(mineInput);
-
-        // TODO: Check for valid board size and mine count
-        while(boardSize > MAX_BOARD_SIZE) {
-            boardSizeInput = JOptionPane.showInputDialog("Board size %i is too big\nEnter a new value");
+        // Check for valid board size, if invalid get new value
+        while(boardSize > MAX_BOARD_SIZE || boardSize <= 0) {
+            boardSize = self.getPopupInputNum("Invalid board size value");
         }
-        while(boardSize <= 0) {
-            
+
+        // Get mineCount from user
+        mineCount = self.getPopupInputNum("Enter total amount of mines");
+
+        // Check for valid mine count, if invalid get new value
+        while(mineCount <= 0 || mineCount >= boardSize * boardSize) {
+            mineCount = self.getPopupInputNum("Invalid mine amount\nEnter a new amount");
         }
 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +43,11 @@ public class MineSweeperGUI {
 
         gui.setVisible(true);
 
+    }
+
+    private int getPopupInputNum(String mesg) {
+        this.boardSizeInput = JOptionPane.showInputDialog(mesg);
+        return Integer.parseInt(this.boardSizeInput);
     }
 
 }
