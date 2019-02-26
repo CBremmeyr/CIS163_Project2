@@ -18,7 +18,11 @@ public class MineSweeperPanel extends JPanel {
     public MineSweeperPanel(int boardSize, int mineCount) throws
             IllegalArgumentException {
 
-        // TODO: Check for valid inputs
+        try {
+            this.game = new MineSweeperGame(boardSize, mineCount);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException();
+        }
 
         this.boardSize = boardSize;
         this.mineCount = mineCount;
@@ -27,7 +31,6 @@ public class MineSweeperPanel extends JPanel {
         this.quitBtn = new JButton();
         this.resetBtn = new JButton();
         this.board = new JButton[boardSize][boardSize];
-        this.game = new MineSweeperGame(boardSize, mineCount);
 
         // Set overall layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -40,7 +43,8 @@ public class MineSweeperPanel extends JPanel {
                 this.board[i][j].setEnabled(true);
 
                 // Attach mouse listener to button
-                this.board[i][j].addMouseListener(new CellMouseAdapter());
+                this.board[i][j].addMouseListener(new CellMouseAdapter(
+                        this.game.getCell(i, j), this.board[i][j]));
 
                 if(game.getCell(i, j).isMine()) {
                     board[i][j].setText("*");
@@ -70,16 +74,34 @@ public class MineSweeperPanel extends JPanel {
 
     private class CellMouseAdapter extends MouseAdapter {
 
+        private Cell cell;
+        private JButton button;
+
+        public CellMouseAdapter(Cell c, JButton b) throws IllegalArgumentException {
+
+            this.cell = c;
+            this.button = b;
+        }
+
         public void mouseClicked(MouseEvent e) {
             super.mouseClicked(e);
 
-
-
+            // Toggle flag on right-click
             if(SwingUtilities.isRightMouseButton(e)) {
-                System.out.println("right click");
+                this.cell.setFlagged(!this.cell.isFlagged());
+
+                // Update text to show if flagged
+                if(this.cell.isFlagged()) {
+                    this.button.setText("F");
+                } else {
+                    this.button.setText(" ");
+                }
+
             }
+
+            // TODO: responde to left-click
             else if(SwingUtilities.isLeftMouseButton(e)) {
-                System.out.println("left click");
+
             }
         }
     }

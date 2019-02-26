@@ -46,7 +46,7 @@ public class MineSweeperGame {
     }
 
     /******************************************************************
-     * Constructor that sets board size and total ammount of mines to
+     * Constructor that sets board size and total amount of mines to
      * be on the board. The game board is also allocated based on
      * boardSize param.
      *

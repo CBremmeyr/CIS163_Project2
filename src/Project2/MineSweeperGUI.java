@@ -9,7 +9,7 @@ import java.util.*;
 
 public class MineSweeperGUI {
 
-    private final int MAX_BOARD_SIZE = 100;
+    public static final int MAX_BOARD_SIZE = 100;
 
     private String boardSizeInput;
     private String mineInput;
@@ -75,7 +75,7 @@ public class MineSweeperGUI {
             }
 
             // Check for valid number
-            if(inputNum <= 0 || inputNum > this.MAX_BOARD_SIZE) {
+            if(inputNum <= 0 || inputNum > MineSweeperGUI.MAX_BOARD_SIZE) {
                 valid = false;
             }
         } while(!valid);
