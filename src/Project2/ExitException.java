@@ -8,4 +8,3 @@ package Project2;
  * @version 25 February 2019
  *********************************************************************/
 public class ExitException extends Exception {}
-
