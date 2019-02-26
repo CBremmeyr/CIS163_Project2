@@ -9,70 +9,98 @@ import java.util.*;
 
 public class MineSweeperGUI {
 
+    private final int MAX_BOARD_SIZE = 100;
+
     private String boardSizeInput;
     private String mineInput;
+    private int boardSize;
+    private int mineCount;
 
     public static void main(String arg[]) {
 
-        final int MAX_BOARD_SIZE = 100;
-
         MineSweeperGUI self = new MineSweeperGUI();
         JFrame gui = new JFrame();
-        int boardSize;
-        int mineCount;
 
         // Get board size from user with jOptionPane
         try {
-            boardSize = self.getPopupInputNum("Enter board size");
+            self.getBoardSize();
         } catch (ExitException e) {
             return;
-        }
-
-        // Check for valid board size, if invalid get new value
-        while(boardSize > MAX_BOARD_SIZE || boardSize <= 0) {
-            try {
-                boardSize = self.getPopupInputNum("Invalid board " +
-                        "size value\nEnter a new board size");
-
-            } catch (ExitException e) {
-                return;
-            }
         }
 
         // Get mineCount from user
         try {
-            mineCount = self.getPopupInputNum("Enter total amount of mines");
+            self.getMineCount();
         } catch (ExitException e) {
             return;
-        }
-
-        // Check for valid mine count, if invalid get new value
-        while(mineCount <= 0 || mineCount >= boardSize * boardSize) {
-            try {
-                mineCount = self.getPopupInputNum("Invalid mine amount\nEnter a new amount");
-            } catch (ExitException e) {
-                return;
-            }
         }
 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setTitle("Mine Sweeper (May the clicks be with you");
 
-        gui.setContentPane(new MineSweeperPanel(boardSize, mineCount));
+        gui.setContentPane(new MineSweeperPanel(self.boardSize, self.mineCount));
         gui.pack();
 
         gui.setVisible(true);
 
     }
 
-    private int getPopupInputNum(String mesg) throws ExitException {
-        this.boardSizeInput = JOptionPane.showInputDialog(mesg);
-        try {
-            return Integer.parseInt(this.boardSizeInput);
+    private void getBoardSize() throws ExitException {
 
-        } catch (Exception e) {
-            throw new ExitException();
-        }
+        boolean valid = true;
+        int inputNum = -1;
+
+        do {
+            String inputStr = JOptionPane.showInputDialog("Enter board size.");
+
+            if(inputStr == null) {
+                throw new ExitException();
+            }
+
+            valid = true;
+
+            try {
+                inputNum = Integer.parseInt(inputStr);
+            } catch (NumberFormatException e) {
+                valid = false;
+            }
+
+            // Check for valid number
+            if(inputNum <= 0 || inputNum > this.MAX_BOARD_SIZE) {
+                valid = false;
+            }
+        } while(!valid);
+
+        this.boardSize = inputNum;
+    }
+
+    private void getMineCount() throws ExitException {
+
+        boolean valid = true;
+        int inputNum = -1;
+
+        do {
+            String inputStr = JOptionPane.showInputDialog("Enter number of mines.");
+
+            if(inputStr == null) {
+                throw new ExitException();
+            }
+
+            valid = true;
+
+            try {
+                inputNum = Integer.parseInt(inputStr);
+            } catch (NumberFormatException e) {
+                valid = false;
+            }
+
+            // Check if valid number
+            if(inputNum <= 0 || inputNum >= this.boardSize * this.boardSize) {
+                valid = false;
+            }
+        } while(!valid);
+
+        this.mineCount = inputNum;
     }
 
 }
