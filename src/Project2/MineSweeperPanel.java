@@ -44,7 +44,10 @@ public class MineSweeperPanel extends JPanel {
 
                 // Attach mouse listener to button
                 this.board[i][j].addMouseListener(new CellMouseAdapter(
-                        this.game.getCell(i, j), this.board[i][j]));
+                        this.game.getCell(i, j),
+                        this.board[i][j],
+                        this.game,
+                        i, j));
 
                 if(game.getCell(i, j).isMine()) {
                     board[i][j].setText("*");
@@ -74,13 +77,19 @@ public class MineSweeperPanel extends JPanel {
 
     private class CellMouseAdapter extends MouseAdapter {
 
+        private MineSweeperGame game;
         private Cell cell;
         private JButton button;
+        private int x;
+        private int y;
 
-        public CellMouseAdapter(Cell c, JButton b) throws IllegalArgumentException {
+        public CellMouseAdapter(Cell c, JButton b, MineSweeperGame g, int x, int y) throws IllegalArgumentException {
 
+            this.game = g;
             this.cell = c;
             this.button = b;
+            this.x = x;
+            this.y = y;
         }
 
         public void mouseClicked(MouseEvent e) {
@@ -99,40 +108,17 @@ public class MineSweeperPanel extends JPanel {
 
             }
 
-            // TODO: respond to left-click
+            // TODO: Respond to left-click
             else if(SwingUtilities.isLeftMouseButton(e)) {
 
+                if(!cell.isFlagged()) {
+                    this.game.select(x, y);
+                }
             }
         }
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
