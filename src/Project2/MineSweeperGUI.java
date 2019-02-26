@@ -1,21 +1,36 @@
 package Project2;
-import org.omg.CORBA.UserException;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-import java.util.*;
 
-
+/**********************************************************************
+ * GUI class to allow user to play a Mine Sweeper clone.
+ *
+ * @author Corbin Bremmeyr
+ * @author Michael James
+ * @version 25 February 2019
+ *********************************************************************/
 public class MineSweeperGUI {
 
-    public static final int MAX_BOARD_SIZE = 100;
+    /** Max board size supported by GUI */
+    public static final int MAX_BOARD_SIZE = 30;
 
+    /** Sting that user enters when prompted for board size */
     private String boardSizeInput;
+
+    /** Sting that user enters when prompted for mine count */
     private String mineInput;
+
+    /** Size of the game board */
     private int boardSize;
+
+    /** Mines on game board */
     private int mineCount;
 
+    /******************************************************************
+     * Game entry point for Mine Sweeper clone.
+     *
+     * @param arg not used, needed to be main().
+     *****************************************************************/
     public static void main(String arg[]) {
 
         MineSweeperGUI self = new MineSweeperGUI();
@@ -75,7 +90,8 @@ public class MineSweeperGUI {
             }
 
             // Check for valid number
-            if(inputNum <= 0 || inputNum > MineSweeperGUI.MAX_BOARD_SIZE) {
+            if(inputNum <= 0 ||
+                    inputNum > MineSweeperGUI.MAX_BOARD_SIZE) {
                 valid = false;
             }
         } while(!valid);

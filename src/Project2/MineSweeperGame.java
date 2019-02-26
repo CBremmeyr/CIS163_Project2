@@ -2,7 +2,13 @@ package Project2;
 
 import java.util.Random;
 
-// TODO: class javadoc comment
+/**********************************************************************
+ * Game logic for Mine Sweeper clone.
+ *
+ * @author Corbin Bremmeyr
+ * @author Michael James
+ * @version 25 February 2019
+ *********************************************************************/
 public class MineSweeperGame {
 
     /** Max dimensions of the game board */
@@ -63,7 +69,7 @@ public class MineSweeperGame {
 
         // Check for valid inputs
         // Board size should be positive and under max size
-        if(boardSize < 0 || boardSize > MAX_BOARD_SIZE) {
+        if(boardSize < 2 || boardSize > MAX_BOARD_SIZE) {
             throw new IllegalArgumentException();
         }
 
