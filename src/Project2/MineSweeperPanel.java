@@ -99,7 +99,7 @@ public class MineSweeperPanel extends JPanel {
 
             }
 
-            // TODO: responde to left-click
+            // TODO: respond to left-click
             else if(SwingUtilities.isLeftMouseButton(e)) {
 
             }
