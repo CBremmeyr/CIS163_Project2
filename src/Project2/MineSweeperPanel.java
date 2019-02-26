@@ -2,9 +2,7 @@ package Project2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class MineSweeperPanel extends JPanel {
 
@@ -43,7 +41,6 @@ public class MineSweeperPanel extends JPanel {
 
                 // Attach mouse listener to button
                 this.board[i][j].addMouseListener(new CellMouseAdapter());
-
 
                 if(game.getCell(i, j).isMine()) {
                     board[i][j].setText("*");

@@ -38,20 +38,29 @@ public class MineSweeperGUI {
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gui.setTitle("Mine Sweeper (May the clicks be with you");
 
-        gui.setContentPane(new MineSweeperPanel(self.boardSize, self.mineCount));
+        gui.setContentPane(new MineSweeperPanel(self.boardSize,
+                self.mineCount));
         gui.pack();
 
         gui.setVisible(true);
 
     }
 
+    /******************************************************************
+     * Gets boardSize value from user with JOptionPane. Does not return
+     * until user enters a valid value.
+     *
+     * @throws ExitException if user presses cancel button on
+     *          the JOptionPane.
+     *****************************************************************/
     private void getBoardSize() throws ExitException {
 
         boolean valid = true;
         int inputNum = -1;
 
         do {
-            String inputStr = JOptionPane.showInputDialog("Enter board size.");
+            String inputStr = JOptionPane.showInputDialog("Enter " +
+                    "board size.");
 
             if(inputStr == null) {
                 throw new ExitException();
@@ -74,13 +83,21 @@ public class MineSweeperGUI {
         this.boardSize = inputNum;
     }
 
+    /******************************************************************
+     * Uses JOptionPane to get mineCount value from user. Does not
+     * return until a valid value as been entered.
+     *
+     * @throws ExitException if cancel button was pressed in
+     *          the JOptionPane
+     *****************************************************************/
     private void getMineCount() throws ExitException {
 
         boolean valid = true;
         int inputNum = -1;
 
         do {
-            String inputStr = JOptionPane.showInputDialog("Enter number of mines.");
+            String inputStr = JOptionPane.showInputDialog("Enter " +
+                    "number of mines.");
 
             if(inputStr == null) {
                 throw new ExitException();
@@ -95,7 +112,8 @@ public class MineSweeperGUI {
             }
 
             // Check if valid number
-            if(inputNum <= 0 || inputNum >= this.boardSize * this.boardSize) {
+            if(inputNum <= 0 ||
+                    inputNum >= this.boardSize * this.boardSize) {
                 valid = false;
             }
         } while(!valid);
